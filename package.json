@@ -1,0 +1,50 @@
+{
+  "name": "github-cms",
+  "version": "0.1.0",
+  "description": "Use your GitHub repositories as a content management system for your static site generator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/operanditech/github-cms.git"
+  },
+  "keywords": [],
+  "author": "Andres Berrios <andres.berrios.j@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/operanditech/github-cms/issues"
+  },
+  "homepage": "https://github.com/operanditech/github-cms#readme",
+  "bin": {
+    "github-cms": "./bin/github-cms.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  },
+  "dependencies": {
+    "commander": "^2.19.0",
+    "gray-matter": "^4.0.1",
+    "node-fetch": "^2.3.0",
+    "parse-link-header": "^1.0.1"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "rules": {
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "never",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ]
+    }
+  }
+}
