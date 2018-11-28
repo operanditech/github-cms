@@ -1,5 +1,7 @@
 # github-cms
 
+![GitHub CMS](logo.png "GitHub CMS Logo")
+
 Use your GitHub repositories as a content management system for your static site generator.
 
 You can use this to provide markdown pages for your site if you are using anything like:
