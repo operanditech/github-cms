@@ -101,9 +101,12 @@ to the markdown files or the JSON file. The logo image files will be named using
 the name of each repo and the extension of the original image provided.
 Your static site generator can then use these files when bundling the built site.
 
-There are two ways to specify a logo image for a repository:
+There are three ways to specify a logo image for a repository.
+Each takes precedence over the previous one in this order:
 
 - In the root directory of the repository, place a file named `logo.png`.
+  Using this method, only the PNG extension is supported.
+- In the root directory of the repository, place a file named `<repository_name>.png`.
   Using this method, only the PNG extension is supported.
 - Specify any other image file in your repository using the
   [config file](#configuration-file), by specifying a `logo` entry in the
