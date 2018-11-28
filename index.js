@@ -82,9 +82,17 @@ function mapRepo(r) {
 }
 
 async function fetchRepoList(owner) {
-  let res = await fetch(`https://api.github.com/orgs/${owner}/repos`)
+  let res = await fetch(`https://api.github.com/orgs/${owner}/repos`, {
+    headers: {
+      Accept: 'application/vnd.github.mercy-preview+json'
+    }
+  })
   if (res.status === 404) {
-    res = await fetch(`https://api.github.com/users/${owner}/repos`)
+    res = await fetch(`https://api.github.com/users/${owner}/repos`, {
+      headers: {
+        Accept: 'application/vnd.github.mercy-preview+json'
+      }
+    })
   }
   if (res.status === 404) {
     throw new Error('User or organization not found')
@@ -102,7 +110,7 @@ async function fetchRepoList(owner) {
 
 async function fetchFrontmatter(owner, repoName) {
   const res = await fetch(
-    `https://raw.github.com/${owner}/${repoName}/master/.github-cms`
+    `https://raw.github.com/${owner}/${repoName}/master/.github-cms.md`
   )
   if (res.status !== 404) {
     return res.text()
