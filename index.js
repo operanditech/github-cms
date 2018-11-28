@@ -37,15 +37,11 @@ async function fetchContent(
       }
 
       // Logo
-      const repoLogoPath = repo.logo || 'logo.png'
-      const logo = await fetchLogo(owner, repo.title, repoLogoPath)
+      const logo = await fetchLogo(owner, repo.title, repo.logo)
       if (logo) {
-        const savedLogoPath = path.join(
-          directory,
-          `${repo.title}.${path.extname(repoLogoPath)}`
-        )
-        fs.writeFileSync(savedLogoPath, logo)
-        repo.logo = savedLogoPath
+        const logoFilename = repo.title + repo.logo ? path.extname(repo.logo) : '.png'
+        fs.writeFileSync(path.join(directory, logoFilename), logo)
+        repo.logo = logoFilename
       } else {
         delete repo.logo
       }
@@ -112,7 +108,7 @@ async function fetchFrontmatter(owner, repoName) {
   const res = await fetch(
     `https://raw.github.com/${owner}/${repoName}/master/.github-cms.md`
   )
-  if (res.status !== 404) {
+  if (res.status === 200) {
     return res.text()
   }
 }
@@ -121,16 +117,28 @@ async function fetchReadme(owner, repoName) {
   const res = await fetch(
     `https://raw.github.com/${owner}/${repoName}/master/README.md`
   )
-  if (res.status !== 404) {
+  if (res.status === 200) {
     return res.text()
   }
 }
 
-async function fetchLogo(owner, repoName, logoPath, directory) {
-  const res = await fetch(
-    `https://raw.github.com/${owner}/${repoName}/master/${logoPath}`
-  )
-  if (res.status !== 404) {
-    return res.raw()
+async function fetchLogo(owner, repoName, logoPath) {
+  let res
+  if (logoPath) {
+    res = await fetch(
+      `https://raw.github.com/${owner}/${repoName}/master/${logoPath}`
+    )
+  } else {
+    res = await fetch(
+      `https://raw.github.com/${owner}/${repoName}/master/${repoName}.png`
+    )
+    if (res.status === 404) {
+      res = await fetch(
+        `https://raw.github.com/${owner}/${repoName}/master/logo.png`
+      )
+    }
+  }
+  if (res.status === 200) {
+    return res.buffer()
   }
 }

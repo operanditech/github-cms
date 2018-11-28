@@ -1,6 +1,6 @@
 # github-cms
 
-![GitHub CMS](logo.png "GitHub CMS Logo")
+![GitHub CMS](github-cms.png "GitHub CMS Logo")
 
 Use your GitHub repositories as a content management system for your static site generator.
 
