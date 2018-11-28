@@ -39,7 +39,7 @@ async function fetchContent(
       // Logo
       const logo = await fetchLogo(owner, repo.title, repo.logo)
       if (logo) {
-        const logoFilename = repo.title + repo.logo ? path.extname(repo.logo) : '.png'
+        const logoFilename = repo.title + path.extname(repo.logo || '*.png')
         fs.writeFileSync(path.join(directory, logoFilename), logo)
         repo.logo = logoFilename
       } else {
